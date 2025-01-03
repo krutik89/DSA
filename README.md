@@ -369,3 +369,139 @@ function bubbleSort(array) {
   - Linear Search: \( \Omega(1) \) (target is the first element).  
   - Binary Search: \( \Omega(1) \) (target is in the middle).  
   - Bubble Sort: \( \Omega(n) \) (list is already sorted).
+
+### What is Time Complexity?  
+Time complexity is a way to measure how the **execution time of an algorithm grows** as the size of the input (\( n \)) increases. Instead of focusing on exact timings, time complexity gives us an **estimate** of how fast or slow an algorithm is based on its steps.
+
+Think of it as asking:  
+- "How much longer will this algorithm take if the input doubles?"  
+- "Which algorithm is faster for large inputs?"
+
+---
+
+### Why is Time Complexity Important?  
+1. **Predict Performance:** Helps us understand how an algorithm will behave for large inputs.  
+2. **Compare Algorithms:** Choose the best algorithm for your needs (e.g., faster, scalable).  
+3. **Avoid Surprises:** Ensures your program won’t become too slow when handling more data.
+
+---
+
+### Common Time Complexity Categories  
+
+| Time Complexity   | Name                | Description                                | Example Algorithm            |
+|--------------------|---------------------|--------------------------------------------|------------------------------|
+| \( O(1) \)         | Constant Time       | Takes the same time, no matter the input.  | Accessing an array element   |
+| \( O(\log n) \)    | Logarithmic Time    | Problem size halves with each step.        | Binary Search                |
+| \( O(n) \)         | Linear Time         | Time grows directly with input size.       | Linear Search                |
+| \( O(n \log n) \)  | Log-Linear Time     | Efficient sorting algorithms.             | Merge Sort                   |
+| \( O(n^2) \)       | Quadratic Time      | Nested loops over the input.               | Bubble Sort                  |
+| \( O(2^n) \)       | Exponential Time    | Grows extremely fast with input size.      | Solving the Fibonacci recursively |
+
+---
+
+### Examples of Time Complexity in Action  
+
+#### 1. **Constant Time - \( O(1) \)**  
+An algorithm that always takes the same amount of time, regardless of input size.  
+
+**Example: Accessing an element in an array**
+```javascript
+function getFirstElement(array) {
+    return array[0]; // Always 1 step
+}
+
+console.log(getFirstElement([10, 20, 30])); // Output: 10
+```
+
+- **Input size (\( n \)) doesn't matter:**  
+  Accessing the first element takes the same time whether the array has 1 element or 1 million elements.
+
+---
+
+#### 2. **Linear Time - \( O(n) \)**  
+The time taken grows proportionally with the input size.
+
+**Example: Finding a target in a list**
+```javascript
+function linearSearch(array, target) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === target) return i; // Found target
+    }
+    return -1; // Target not found
+}
+
+console.log(linearSearch([10, 20, 30, 40, 50], 30)); // Output: 2
+```
+
+- If the array has 5 elements, it might take up to 5 steps.  
+- If the array has 1,000 elements, it might take up to 1,000 steps.
+
+---
+
+#### 3. **Logarithmic Time - \( O(\log n) \)**  
+The time taken grows slower because the problem size is halved with each step.
+
+**Example: Binary Search (on a sorted array)**
+```javascript
+function binarySearch(array, target) {
+    let left = 0, right = array.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (array[mid] === target) return mid;
+        else if (array[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+
+    return -1; // Target not found
+}
+
+console.log(binarySearch([10, 20, 30, 40, 50], 30)); // Output: 2
+```
+
+- If the array has 1,000 elements, Binary Search only takes about 10 steps.  
+- For 1,000,000 elements, it takes about 20 steps.
+
+---
+
+#### 4. **Quadratic Time - \( O(n^2) \)**  
+The time taken grows quadratically due to nested loops.
+
+**Example: Printing all pairs of elements**
+```javascript
+function printPairs(array) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length; j++) {
+            console.log(`(${array[i]}, ${array[j]})`);
+        }
+    }
+}
+
+printPairs([1, 2, 3]);
+```
+
+- For 3 elements, there are \( 3^2 = 9 \) pairs.  
+- For 1,000 elements, there are \( 1,000^2 = 1,000,000 \) pairs.  
+- Runtime grows **much faster** compared to linear time.
+
+---
+
+### Comparing Growth Rates  
+
+| Input Size (\( n \)) | \( O(1) \) | \( O(\log n) \) | \( O(n) \) | \( O(n^2) \) |
+|-----------------------|------------|------------------|------------|--------------|
+| 10                   | 1 step     | 3 steps          | 10 steps   | 100 steps    |
+| 100                  | 1 step     | 7 steps          | 100 steps  | 10,000 steps |
+| 1,000                | 1 step     | 10 steps         | 1,000 steps | 1,000,000 steps |
+
+For large inputs, algorithms with lower time complexity are much more efficient.
+
+---
+
+### Summary of Time Complexity  
+
+- **Constant Time (\( O(1) \)):** Best performance, independent of input size.  
+- **Linear Time (\( O(n) \)):** Time grows directly with input size.  
+- **Logarithmic Time (\( O(\log n) \)):** Problem size shrinks with each step.  
+- **Quadratic Time (\( O(n^2) \)):** Time grows quickly due to nested loops.  
