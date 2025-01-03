@@ -243,3 +243,129 @@ function bubbleSort(array) {
    - **Sorting Algorithms:**  
      - Merge Sort: \( \Theta(n \log n) \)  
      - Bubble Sort: \( \Theta(n^2) \)
+
+### What is Big-Omega (\( \Omega \)) Notation?  
+Big-Omega (\( \Omega \)) notation is a way to describe the **best-case scenario** of an algorithm. It gives the **minimum amount of time** an algorithm will take to complete, regardless of the circumstances.
+
+In simple terms:  
+- It shows the **fastest** an algorithm can be, even if everything goes perfectly.
+
+---
+
+### Why is Big-Omega Important?  
+While Big-O (\( O \)) tells us how bad things can get, Big-Omega (\( \Omega \)) helps us understand:  
+- The minimum time we can expect from an algorithm.  
+- The **absolute best-case performance** for highly optimized situations.
+
+---
+
+### Real-Life Analogy  
+Imagine you're driving to work.  
+- In the **worst-case** (traffic, accidents), it takes 1 hour.  
+- In the **best-case** (no traffic, all green lights), it takes 20 minutes.  
+- **Big-Omega (\( \Omega \))** would represent the 20-minute drive, the minimum time it could possibly take.  
+
+---
+
+### Formal Definition of Big-Omega  
+For a function \( f(n) \), an algorithm is \( \Omega(g(n)) \) if:  
+- There exists a constant \( c > 0 \) and an input size \( n_0 \) such that \( f(n) \geq c \cdot g(n) \) for all \( n \geq n_0 \).
+
+In simpler terms:  
+The algorithm will always take **at least** \( g(n) \) time, no matter the input.
+
+---
+
+### Examples of Big-Omega Notation
+
+#### 1. **Linear Search (\( \Omega(1) \))**  
+Linear search goes through a list element by element to find a target.
+
+**Code Example:**
+```javascript
+function linearSearch(array, target) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === target) return i; // Found target
+    }
+    return -1; // Target not found
+}
+```
+
+- **Best-case scenario (\( \Omega(1) \)):**  
+  If the target is the **first element**, the algorithm only takes **1 step**.
+
+- **Worst-case scenario (\( O(n) \)):**  
+  If the target is the last element or not in the list, it takes \( n \) steps.
+
+---
+
+#### 2. **Binary Search (\( \Omega(1) \))**  
+Binary search repeatedly divides the list in half to find the target.
+
+**Code Example:**
+```javascript
+function binarySearch(array, target) {
+    let left = 0, right = array.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (array[mid] === target) return mid; // Found target
+        else if (array[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+
+    return -1; // Target not found
+}
+```
+
+- **Best-case scenario (\( \Omega(1) \)):**  
+  If the target is in the **middle of the list**, it only takes **1 step**.
+
+- **Worst-case scenario (\( O(\log n) \)):**  
+  If the target is far from the middle, it takes \( \log n \) steps.
+
+---
+
+#### 3. **Bubble Sort (\( \Omega(n) \))**  
+Bubble sort repeatedly compares adjacent elements and swaps them if they're in the wrong order.
+
+**Code Example:**
+```javascript
+function bubbleSort(array) {
+    let n = array.length;
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                [array[j], array[j + 1]] = [array[j + 1], array[j]]; // Swap
+            }
+        }
+    }
+    return array;
+}
+```
+
+- **Best-case scenario (\( \Omega(n) \)):**  
+  If the list is **already sorted**, the algorithm only makes a single pass to verify the order.
+
+- **Worst-case scenario (\( O(n^2) \)):**  
+  If the list is completely reversed, the algorithm makes \( n^2 \) comparisons.
+
+---
+
+### Visualization of Big-Omega  
+
+| Input Size (\( n \)) | Algorithm       | Best-Case Time (\( \Omega \)) |
+|-----------------------|-----------------|--------------------------------|
+| 10                   | Linear Search   | 1 step (\( \Omega(1) \))      |
+| 10                   | Binary Search   | 1 step (\( \Omega(1) \))      |
+| 10                   | Bubble Sort     | 10 steps (\( \Omega(n) \))    |
+
+---
+
+### Summary of Big-Omega  
+- **Big-Omega focuses on the best-case scenario.**  
+- It tells us the minimum time an algorithm will take if everything goes perfectly.  
+- **Examples of Big-Omega:**  
+  - Linear Search: \( \Omega(1) \) (target is the first element).  
+  - Binary Search: \( \Omega(1) \) (target is in the middle).  
+  - Bubble Sort: \( \Omega(n) \) (list is already sorted).
